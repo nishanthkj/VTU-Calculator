@@ -9,7 +9,7 @@ function Footer() {
         <div className="footer-content">
           <div className="footer-section">
             <h2>Devloped By</h2>
-            <p>Nishanth K J</p>
+            <p>Nishanth</p>
           </div>
 
           <div className="footer-section social-media">
