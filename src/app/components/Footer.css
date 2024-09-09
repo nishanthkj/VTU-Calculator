@@ -1,0 +1,75 @@
+/* Footer.css */
+footer {
+  background-color: #111827;
+  color: #fff;
+  padding: 10px 0; /* Reduced padding */
+  position: relative; /* Relative positioning for footer */
+  width: 100%;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Center the footer content horizontally */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: center; /* Center the content within the container */
+  align-items: center;
+  gap: 40px; /* Space between sections */
+  width: 100%;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center content within each section */
+}
+
+.footer-section h2 {
+  font-size: 1.2rem; /* Smaller font size */
+  margin-bottom: 5px;
+}
+
+.footer-section p {
+  font-size: 1rem; /* Smaller font size */
+}
+
+.social-media .social-icons {
+  display: flex;
+  justify-content: center; /* Horizontally center icons */
+  gap: 15px; /* Spacing between icons */
+}
+
+.social-media .social-icons a {
+  color: #fff;
+  font-size: 1.5rem; /* Adjusted icon size */
+  transition: color 0.3s ease;
+}
+
+.social-media .social-icons a:hover {
+  color: #1da1f2; /* Twitter Blue */
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    gap: 20px; /* Adjust spacing for mobile */
+  }
+
+  .social-icons {
+    gap: 10px; /* Adjust spacing for mobile */
+  }
+}
