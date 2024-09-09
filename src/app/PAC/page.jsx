@@ -10,7 +10,7 @@ const styles = {
     minHeight: "80vh",
     padding: "20px",
     boxSizing: "border-box",
-    backgroundColor: "#ffffff", // Added white background color
+    backgroundColor: "#ffffff", // White background color
   },
   section: {
     width: "100%",
@@ -55,11 +55,11 @@ const styles = {
     textAlign: "center",
   },
   h2: {
-    fontSize: "24px", // Adjust this value to increase or decrease font size
-    color: "#000000", // Black color
-    fontFamily: "'Arial', sans-serif", // Change to your desired font family
-    fontWeight: "bold", // Adjust font weight if needed
-    paddingBottom: "30px", // Add padding (can be adjusted as needed)
+    fontSize: "24px",
+    color: "#000000",
+    fontFamily: "'Arial', sans-serif",
+    fontWeight: "bold",
+    paddingBottom: "30px",
   }
 };
 
@@ -73,6 +73,7 @@ function SEM1() {
     s6: "",
     s7: "",
     s8: "",
+    s9: "",
   });
 
   const [result, setResult] = useState(""); // To store the calculated SGPA
@@ -91,34 +92,33 @@ function SEM1() {
 
   // Function to calculate SGPA
   const calculateSGPA = () => {
-    const s1 = parseInt(credit(scores.s1)) || 0;
-    const s2 = parseInt(credit(scores.s2)) || 0;
-    const s3 = parseInt(credit(scores.s3)) || 0;
-    const s4 = parseInt(credit(scores.s4)) || 0;
-    const s5 = parseInt(credit(scores.s5)) || 0;
-    const s6 = parseInt(credit(scores.s6)) || 0;
-    const s7 = parseInt(credit(scores.s7)) || 0;
-    const s8 = parseInt(credit(scores.s8)) || 0;
+    const credits = {
+      s1: 3,
+      s2: 3,
+      s3: 3,
+      s4: 3,
+      s5: 3,
+      s6: 1,
+      s7: 1,
+      s8: 2,
+      s9: 1
+    };
 
-    const r = parseFloat(
-      (s1 * 4 + s2 * 1 + s3 * 4 + s4 * 3 + s5 * 3 + s6 * 1 + s7 * 1 + s8 * 1) /
-        18
-    );
+    const totalCredits = Object.values(credits).reduce((acc, credit) => acc + credit, 0);
 
-    setResult(r.toFixed(2)); // Set the calculated SGPA
-  };
+    const weightedSum = 
+      (parseInt(scores.s1) || 0) * credits.s1 +
+      (parseInt(scores.s2) || 0) * credits.s2 +
+      (parseInt(scores.s3) || 0) * credits.s3 +
+      (parseInt(scores.s4) || 0) * credits.s4 +
+      (parseInt(scores.s5) || 0) * credits.s5 +
+      (parseInt(scores.s6) || 0) * credits.s6 +
+      (parseInt(scores.s7) || 0) * credits.s7 +
+      (parseInt(scores.s8) || 0) * credits.s8 +
+      (parseInt(scores.s9) || 0) * credits.s9;
 
-  // Function to calculate credits based on score
-  const credit = (s) => {
-    const score = parseInt(s);
-    if (isNaN(score)) return 0; // Handle invalid input
-    if (90 <= score) return 10;
-    else if (80 <= score) return 9;
-    else if (70 <= score) return 8;
-    else if (60 <= score) return 7;
-    else if (50 <= score) return 6;
-    else if (40 <= score) return 5;
-    else return 0; // Default to 0 if score is below 40
+    const sgpa = weightedSum / totalCredits;
+    setResult(sgpa.toFixed(2)); // Set the calculated SGPA
   };
 
   return (
@@ -132,7 +132,7 @@ function SEM1() {
             type="number"
             id="s1"
             style={styles.input}
-            placeholder="21MAT11 / 21MAT21 (4 credits)"
+            placeholder="21MAT11 / 21MAT21 (3 credits)"
             value={scores.s1}
             onChange={handleChange}
             min="0"
@@ -146,7 +146,7 @@ function SEM1() {
             type="number"
             id="s2"
             style={styles.input}
-            placeholder="21PHY12 / 21CHE22 (1 credit)"
+            placeholder="21PHY12 / 21CHE22 (3 credits)"
             value={scores.s2}
             onChange={handleChange}
             min="0"
@@ -160,7 +160,7 @@ function SEM1() {
             type="number"
             id="s3"
             style={styles.input}
-            placeholder="21ELE13 / 21PSP23 (4 credits)"
+            placeholder="21ELE13 / 21PSP23 (3 credits)"
             value={scores.s3}
             onChange={handleChange}
             min="0"
@@ -230,8 +230,22 @@ function SEM1() {
             type="number"
             id="s8"
             style={styles.input}
-            placeholder="21EGH18 / 21EGH28 (1 credit)"
+            placeholder="21EGH18 / 21EGH28 (2 credits)"
             value={scores.s8}
+            onChange={handleChange}
+            min="0"
+            max="100"
+          />
+        </div>
+
+        {/* Subject 9 */}
+        <div style={styles.gap}>
+          <input
+            type="number"
+            id="s9"
+            style={styles.input}
+            placeholder="21IDT19 / 21SFH29 (1 credit)"
+            value={scores.s9}
             onChange={handleChange}
             min="0"
             max="100"

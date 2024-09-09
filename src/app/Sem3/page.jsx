@@ -73,6 +73,7 @@ function SEM1() {
     s6: "",
     s7: "",
     s8: "",
+    s9: "",
   });
 
   const [result, setResult] = useState(""); // To store the calculated SGPA
@@ -91,21 +92,33 @@ function SEM1() {
 
   // Function to calculate SGPA
   const calculateSGPA = () => {
-    const s1 = parseInt(scores.s1) || 0;
-    const s2 = parseInt(scores.s2) || 0;
-    const s3 = parseInt(scores.s3) || 0;
-    const s4 = parseInt(scores.s4) || 0;
-    const s5 = parseInt(scores.s5) || 0;
-    const s6 = parseInt(scores.s6) || 0;
-    const s7 = parseInt(scores.s7) || 0;
-    const s8 = parseInt(scores.s8) || 0;
+    const credits = {
+      s1: 3, // 21MAT31
+      s2: 4, // 21XX32
+      s3: 4, // 21XX33
+      s4: 3, // 21XX34
+      s5: 1, // 21XXL35
+      s6: 2, // 21INT36
+      s7: 1, // 21KSK37
+      s8: 1, // 21XX38x
+      s9: 1  // 21UH39
+    };
 
-    const r = parseFloat(
-      (s1 * 3 + s2 * 4 + s3 * 4 + s4 * 3 + s5 * 1 + s6 * 2 + s7 * 1 + s8 * 1) /
-      (3 + 4 + 4 + 3 + 1 + 2 + 1 + 1) // Sum of all credits
-    );
+    const totalCredits = Object.values(credits).reduce((acc, credit) => acc + credit, 0);
 
-    setResult(r.toFixed(2)); // Set the calculated SGPA
+    const weightedSum =
+      (parseInt(scores.s1) || 0) * credits.s1 +
+      (parseInt(scores.s2) || 0) * credits.s2 +
+      (parseInt(scores.s3) || 0) * credits.s3 +
+      (parseInt(scores.s4) || 0) * credits.s4 +
+      (parseInt(scores.s5) || 0) * credits.s5 +
+      (parseInt(scores.s6) || 0) * credits.s6 +
+      (parseInt(scores.s7) || 0) * credits.s7 +
+      (parseInt(scores.s8) || 0) * credits.s8 +
+      (parseInt(scores.s9) || 0) * credits.s9;
+
+    const sgpa = weightedSum / totalCredits;
+    setResult(sgpa.toFixed(2)); // Set the calculated SGPA
   };
 
   return (
@@ -219,6 +232,20 @@ function SEM1() {
             style={styles.input}
             placeholder="21XX38x (1 credit)"
             value={scores.s8}
+            onChange={handleChange}
+            min="0"
+            max="100"
+          />
+        </div>
+
+        {/* Subject 9 */}
+        <div style={styles.gap}>
+          <input
+            type="number"
+            id="s9"
+            style={styles.input}
+            placeholder="21UH39 (1 credit)"
+            value={scores.s9}
             onChange={handleChange}
             min="0"
             max="100"

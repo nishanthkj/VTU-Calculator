@@ -63,7 +63,7 @@ const styles = {
   }
 };
 
-function SEM1() {
+function SEM4() {
   const [scores, setScores] = useState({
     s1: "",
     s2: "",
@@ -73,6 +73,7 @@ function SEM1() {
     s6: "",
     s7: "",
     s8: "",
+    s9: "",
   });
 
   const [result, setResult] = useState(""); // To store the calculated SGPA
@@ -91,21 +92,33 @@ function SEM1() {
 
   // Function to calculate SGPA
   const calculateSGPA = () => {
-    const s1 = parseInt(scores.s1) || 0;
-    const s2 = parseInt(scores.s2) || 0;
-    const s3 = parseInt(scores.s3) || 0;
-    const s4 = parseInt(scores.s4) || 0;
-    const s5 = parseInt(scores.s5) || 0;
-    const s6 = parseInt(scores.s6) || 0;
-    const s7 = parseInt(scores.s7) || 0;
-    const s8 = parseInt(scores.s8) || 0;
+    const credits = {
+      s1: 3, // 21MAT41
+      s2: 4, // 21XX42
+      s3: 4, // 21XX43
+      s4: 3, // 21XX44
+      s5: 2, // 21BE45
+      s6: 1, // 21XXL46
+      s7: 1, // 21KSK47
+      s8: 1, // 21XX48x
+      s9: 1  // 21UH49
+    };
 
-    const r = parseFloat(
-      (s1 * 3 + s2 * 4 + s3 * 4 + s4 * 3 + s5 * 2 + s6 * 1 + s7 * 1 + s8 * 1) /
-      (3 + 4 + 4 + 3 + 2 + 1 + 1 + 1) // Sum of all credits
-    );
+    const totalCredits = Object.values(credits).reduce((acc, credit) => acc + credit, 0);
 
-    setResult(r.toFixed(2)); // Set the calculated SGPA
+    const weightedSum =
+      (parseInt(scores.s1) || 0) * credits.s1 +
+      (parseInt(scores.s2) || 0) * credits.s2 +
+      (parseInt(scores.s3) || 0) * credits.s3 +
+      (parseInt(scores.s4) || 0) * credits.s4 +
+      (parseInt(scores.s5) || 0) * credits.s5 +
+      (parseInt(scores.s6) || 0) * credits.s6 +
+      (parseInt(scores.s7) || 0) * credits.s7 +
+      (parseInt(scores.s8) || 0) * credits.s8 +
+      (parseInt(scores.s9) || 0) * credits.s9;
+
+    const sgpa = weightedSum / totalCredits;
+    setResult(sgpa.toFixed(2)); // Set the calculated SGPA
   };
 
   return (
@@ -225,6 +238,20 @@ function SEM1() {
           />
         </div>
 
+        {/* Subject 9 */}
+        <div style={styles.gap}>
+          <input
+            type="number"
+            id="s9"
+            style={styles.input}
+            placeholder="21UH49 (1 credit)"
+            value={scores.s9}
+            onChange={handleChange}
+            min="0"
+            max="100"
+          />
+        </div>
+
         {/* Calculate Button */}
         <div style={styles.gap}>
           <button
@@ -257,4 +284,4 @@ function SEM1() {
   );
 }
 
-export default SEM1;
+export default SEM4
