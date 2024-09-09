@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import { MdDelete } from "react-icons/md"; // Import the delete icon
 
 // CSS Styles as a JavaScript object
 const styles = {
@@ -23,36 +24,43 @@ const styles = {
   gap: {
     marginBottom: "15px",
   },
+  inputContainer: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%", // Full width of the parent container
+    gap: "10px", // Space between inputs
+  },
+  inputGroup: {
+    display: "flex",
+    flexDirection: "row", // Default row direction
+    alignItems: "center",
+    width: "100%",
+    gap: "10px", // Space between inputs
+    flexWrap: "wrap", // Allow wrapping on small screens
+  },
   input: {
-    padding: "10px",
-    fontSize: "16px",
+    padding: "5px", // Reduced padding for smaller size
+    fontSize: "14px", // Reduced font size
     border: "1px solid #ccc",
     borderRadius: "4px",
     textAlign: "center",
-    width: "calc(100% - 22px)", // Full width minus padding and borders
     color: "#000", // Black color for input text
+    flex: "1 1 auto", // Allow input to grow and shrink
+    minWidth: "60px", // Minimum width to prevent too small inputs
   },
   smallInput: {
-    width: "80px", // Adjust width for smaller credit input
-    fontSize: "14px", // Smaller font size for credits
-    marginRight: "10px", // Space between credits and other inputs
-    color: "#000", // Black color for input text
+    flex: "1 1 20%", // Flex-basis for credits
   },
   marksInput: {
-    width: "80px", // Adjust width for smaller marks input
-    fontSize: "14px", // Smaller font size for marks
-    marginRight: "10px", // Space between marks and other inputs
-    color: "#000", // Black color for input text
+    flex: "1 1 20%", // Flex-basis for marks
   },
   subjectNameInput: {
-    width: "calc(100% - 22px)", // Full width minus padding and borders
-    fontSize: "18px", // Medium font size for subject name
-    marginRight: "10px",
-    color: "#000", // Black color for input text
+    flex: "2 1 40%", // Flex-basis for subject name
   },
   subjectContainer: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row", // Keep subjects in a row
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: "10px",
@@ -60,10 +68,11 @@ const styles = {
     border: "1px solid #ddd",
     borderRadius: "4px",
     boxSizing: "border-box",
+    width: "100%",
   },
   subjectHeader: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row", // Keep header in a row
     alignItems: "center",
     marginBottom: "5px",
   },
@@ -104,12 +113,13 @@ const styles = {
   removeButton: {
     color: "#ff0000",
     cursor: "pointer",
-    padding: "5px 10px",
-    fontSize: "14px",
-    border: "1px solid #ff0000",
-    borderRadius: "4px",
-    backgroundColor: "#ffffff",
+    fontSize: "20px", // Font size for the icon
     marginLeft: "10px",
+    width: "30px", // Fixed width for the button
+    height: "30px", // Fixed height for the button
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
   },
   table: {
     width: "100%",
@@ -138,6 +148,29 @@ const styles = {
     fontSize: "16px",
     color: "#333",
     marginBottom: "10px",
+  },
+};
+
+// Media Queries for responsiveness
+const mediaQueries = {
+  "@media (max-width: 768px)": {
+    inputGroup: {
+      flexDirection: "column", // Stack inputs vertically on small screens
+      gap: "5px", // Reduce space between inputs on small screens
+    },
+    smallInput: {
+      flex: "1 1 100%", // Full width on small screens
+    },
+    marksInput: {
+      flex: "1 1 100%", // Full width on small screens
+    },
+    subjectNameInput: {
+      flex: "1 1 100%", // Full width on small screens
+    },
+    removeButton: {
+      width: "24px", // Smaller width on small screens
+      height: "24px", // Smaller height on small screens
+    },
   },
 };
 
@@ -193,38 +226,38 @@ function CustomSGPACalculator() {
 
         {subjects.map((subject, index) => (
           <div key={index} style={styles.subjectContainer}>
-            <input
-              type="text"
-              style={{ ...styles.input, ...styles.subjectNameInput }}
-              placeholder="Subject Name"
-              value={subject.name}
-              onChange={(e) => handleChange(index, 'name', e.target.value)}
-            />
-            <input
-              type="number"
-              style={{ ...styles.input, ...styles.smallInput }}
-              placeholder="Credits"
-              value={subject.credits}
-              onChange={(e) => handleChange(index, 'credits', e.target.value)}
-              min="0"
-            />
-            <input
-              type="number"
-              style={{ ...styles.input, ...styles.marksInput }}
-              placeholder="Marks"
-              value={subject.marks}
-              onChange={(e) => handleChange(index, 'marks', e.target.value)}
-              min="0"
-              max="100"
-            />
-            {subjects.length > 1 && (
-              <div
-                style={styles.removeButton}
-                onClick={() => removeSubject(index)}
-              >
-                Remove
-              </div>
-            )}
+            <div style={styles.inputGroup}>
+              <input
+                type="text"
+                style={{ ...styles.input, ...styles.subjectNameInput }}
+                placeholder="Subject Name"
+                value={subject.name}
+                onChange={(e) => handleChange(index, 'name', e.target.value)}
+              />
+              <input
+                type="number"
+                style={{ ...styles.input, ...styles.smallInput }}
+                placeholder="Credits"
+                value={subject.credits}
+                onChange={(e) => handleChange(index, 'credits', e.target.value)}
+                min="0"
+              />
+              <input
+                type="number"
+                style={{ ...styles.input, ...styles.marksInput }}
+                placeholder="Marks"
+                value={subject.marks}
+                onChange={(e) => handleChange(index, 'marks', e.target.value)}
+                min="0"
+                max="100"
+              />
+              {subjects.length > 1 && (
+                <MdDelete
+                  style={styles.removeButton}
+                  onClick={() => removeSubject(index)}
+                />
+              )}
+            </div>
           </div>
         ))}
 
