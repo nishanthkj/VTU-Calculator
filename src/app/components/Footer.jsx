@@ -8,7 +8,7 @@ function Footer() {
       <div className="container">
         <div className="footer-content">
           <div className="footer-section">
-            <h2>Built By</h2>
+            <h2>Devloped By</h2>
             <p>Nishanth K J</p>
           </div>
 
