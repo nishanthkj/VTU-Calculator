@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { MdDelete } from "react-icons/md"; // Import the delete icon
+import { MdDelete } from "react-icons/md";
 
 // CSS Styles as a JavaScript object
 const styles = {
@@ -11,12 +11,12 @@ const styles = {
     minHeight: "80vh",
     padding: "20px",
     boxSizing: "border-box",
-    backgroundColor: "#ffffff", // Set background color to white
-    width: "100%", // Full width of the viewport
+    backgroundColor: "#ffffff",
+    width: "100%",
   },
   section: {
-    width: "90%", // Adjust width to be a percentage of the container
-    maxWidth: "800px", // Maximum width for larger screens
+    width: "90%",
+    maxWidth: "800px",
     padding: "20px",
     boxSizing: "border-box",
     textAlign: "center",
@@ -28,39 +28,39 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    width: "100%", // Full width of the parent container
-    gap: "10px", // Space between inputs
+    width: "100%",
+    gap: "10px",
   },
   inputGroup: {
     display: "flex",
-    flexDirection: "row", // Default row direction
+    flexDirection: "row",
     alignItems: "center",
     width: "100%",
-    gap: "10px", // Space between inputs
-    flexWrap: "wrap", // Allow wrapping on small screens
+    gap: "10px",
+    flexWrap: "wrap",
   },
   input: {
-    padding: "5px", // Reduced padding for smaller size
-    fontSize: "14px", // Reduced font size
+    padding: "5px",
+    fontSize: "14px",
     border: "1px solid #ccc",
     borderRadius: "4px",
     textAlign: "center",
-    color: "#000", // Black color for input text
-    flex: "1 1 auto", // Allow input to grow and shrink
-    minWidth: "60px", // Minimum width to prevent too small inputs
+    color: "#000",
+    flex: "1 1 auto",
+    minWidth: "60px",
   },
   smallInput: {
-    flex: "1 1 20%", // Flex-basis for credits
+    flex: "1 1 20%",
   },
   marksInput: {
-    flex: "1 1 20%", // Flex-basis for marks
+    flex: "1 1 20%",
   },
   subjectNameInput: {
-    flex: "2 1 40%", // Flex-basis for subject name
+    flex: "2 1 40%",
   },
   subjectContainer: {
     display: "flex",
-    flexDirection: "row", // Keep subjects in a row
+    flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: "10px",
@@ -72,7 +72,7 @@ const styles = {
   },
   subjectHeader: {
     display: "flex",
-    flexDirection: "row", // Keep header in a row
+    flexDirection: "row",
     alignItems: "center",
     marginBottom: "5px",
   },
@@ -101,22 +101,22 @@ const styles = {
     textAlign: "center",
   },
   h2: {
-    fontSize: "24px", // Adjust this value to increase or decrease font size
-    color: "#000000", // Black color
-    fontFamily: "'Arial', sans-serif", // Change to your desired font family
-    fontWeight: "bold", // Adjust font weight if needed
-    paddingBottom: "20px", // Add padding to the bottom (adjust as needed)
+    fontSize: "24px",
+    color: "#000000",
+    fontFamily: "'Arial', sans-serif",
+    fontWeight: "bold",
+    paddingBottom: "20px",
   },
   addButton: {
-    margin: "20px 0", // Added margin to the top and bottom
+    margin: "20px 0",
   },
   removeButton: {
     color: "#ff0000",
     cursor: "pointer",
-    fontSize: "20px", // Font size for the icon
+    fontSize: "20px",
     marginLeft: "10px",
-    width: "30px", // Fixed width for the button
-    height: "30px", // Fixed height for the button
+    width: "30px",
+    height: "30px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -134,7 +134,7 @@ const styles = {
     border: "1px solid #ddd",
     padding: "8px",
     textAlign: "center",
-    color: "#333", // Dark grey color for table text
+    color: "#333",
   },
   calculationDetails: {
     marginTop: "20px",
@@ -149,29 +149,65 @@ const styles = {
     color: "#333",
     marginBottom: "10px",
   },
+  formulaSection: {
+    marginTop: "20px",
+    padding: "10px",
+    border: "1px solid #ddd",
+    borderRadius: "4px",
+    backgroundColor: "#f9f9f9",
+    textAlign: "left",
+  },
+  formulaText: {
+    fontSize: "16px",
+    color: "#333",
+  },
 };
 
 // Media Queries for responsiveness
 const mediaQueries = {
   "@media (max-width: 768px)": {
     inputGroup: {
-      flexDirection: "column", // Stack inputs vertically on small screens
-      gap: "5px", // Reduce space between inputs on small screens
+      flexDirection: "column",
+      gap: "5px",
     },
     smallInput: {
-      flex: "1 1 100%", // Full width on small screens
+      flex: "1 1 100%",
     },
     marksInput: {
-      flex: "1 1 100%", // Full width on small screens
+      flex: "1 1 100%",
     },
     subjectNameInput: {
-      flex: "1 1 100%", // Full width on small screens
+      flex: "1 1 100%",
     },
     removeButton: {
-      width: "24px", // Smaller width on small screens
-      height: "24px", // Smaller height on small screens
+      width: "24px",
+      height: "24px",
     },
   },
+};
+
+// Function to convert percentage to grade points
+const getGradePoint = (percentage) => {
+  if (percentage >= 90) return 10;
+  if (percentage >= 80) return 9;
+  if (percentage >= 70) return 8;
+  if (percentage >= 60) return 7;
+  if (percentage >= 55) return 6;
+  if (percentage >= 50) return 5;
+  if (percentage >= 40) return 4;
+  return 0;
+};
+
+// Function to get grade based on percentage
+const getGrade = (percentage) => {
+  if (percentage >= 90) return "O";
+  if (percentage >= 80) return "A+";
+  if (percentage >= 70) return "A";
+  if (percentage >= 60) return "B+";
+  if (percentage >= 55) return "B";
+  if (percentage >= 50) return "C";
+  if (percentage >= 40) return "P";
+  return "F";
 };
 
 function CustomSGPACalculator() {
@@ -188,6 +224,7 @@ function CustomSGPACalculator() {
     const updatedSubjects = [...subjects];
     updatedSubjects[index] = { ...updatedSubjects[index], [field]: value };
     setSubjects(updatedSubjects);
+    calculateSGPA(); // Recalculate SGPA on any input change
   };
 
   // Add a new subject input at the top
@@ -199,23 +236,26 @@ function CustomSGPACalculator() {
   const removeSubject = (index) => {
     const updatedSubjects = subjects.filter((_, i) => i !== index);
     setSubjects(updatedSubjects);
+    calculateSGPA(); // Recalculate SGPA on subject removal
   };
 
   // Function to calculate SGPA
   const calculateSGPA = () => {
-    let totalMarks = 0;
+    let weightedSum = 0;
     let totalCredits = 0;
 
     subjects.forEach((subject) => {
-      const marks = parseInt(subject.marks) || 0;
-      const credits = parseInt(subject.credits) || 0;
-      totalMarks += marks * credits;
+      const credits = parseFloat(subject.credits) || 0;
+      const marks = parseFloat(subject.marks) || 0;
+      const gradePoint = getGradePoint(marks);
+
+      weightedSum += gradePoint * credits;
       totalCredits += credits;
     });
 
-    const sgpa = totalCredits > 0 ? (totalMarks / totalCredits).toFixed(2) : 0;
+    const sgpa = totalCredits > 0 ? (weightedSum / totalCredits).toFixed(2) : 0;
     setResult(sgpa);
-    setTotalMarks(totalMarks);
+    setTotalMarks(weightedSum);
     setTotalCredits(totalCredits);
   };
 
@@ -224,6 +264,7 @@ function CustomSGPACalculator() {
       <section style={styles.section}>
         <h2 style={styles.h2}>Custom SGPA Calculator</h2>
 
+        {/* Input fields for subjects */}
         {subjects.map((subject, index) => (
           <div key={index} style={styles.subjectContainer}>
             <div style={styles.inputGroup}>
@@ -232,14 +273,14 @@ function CustomSGPACalculator() {
                 style={{ ...styles.input, ...styles.subjectNameInput }}
                 placeholder="Subject Name"
                 value={subject.name}
-                onChange={(e) => handleChange(index, 'name', e.target.value)}
+                onChange={(e) => handleChange(index, "name", e.target.value)}
               />
               <input
                 type="number"
                 style={{ ...styles.input, ...styles.smallInput }}
                 placeholder="Credits"
                 value={subject.credits}
-                onChange={(e) => handleChange(index, 'credits', e.target.value)}
+                onChange={(e) => handleChange(index, "credits", e.target.value)}
                 min="0"
               />
               <input
@@ -247,7 +288,7 @@ function CustomSGPACalculator() {
                 style={{ ...styles.input, ...styles.marksInput }}
                 placeholder="Marks"
                 value={subject.marks}
-                onChange={(e) => handleChange(index, 'marks', e.target.value)}
+                onChange={(e) => handleChange(index, "marks", e.target.value)}
                 min="0"
                 max="100"
               />
@@ -304,6 +345,8 @@ function CustomSGPACalculator() {
               <th style={styles.tableCell}>Subject Name</th>
               <th style={styles.tableCell}>Credits</th>
               <th style={styles.tableCell}>Marks</th>
+              <th style={styles.tableCell}>Grade Points</th>
+              <th style={styles.tableCell}>Grade</th>
             </tr>
           </thead>
           <tbody>
@@ -312,6 +355,8 @@ function CustomSGPACalculator() {
                 <td style={styles.tableCell}>{subject.name}</td>
                 <td style={styles.tableCell}>{subject.credits}</td>
                 <td style={styles.tableCell}>{subject.marks}</td>
+                <td style={styles.tableCell}>{getGradePoint(subject.marks)}</td>
+                <td style={styles.tableCell}>{getGrade(subject.marks)}</td>
               </tr>
             ))}
           </tbody>
@@ -320,13 +365,33 @@ function CustomSGPACalculator() {
         {/* Display Calculation Details */}
         <div style={styles.calculationDetails}>
           <div style={styles.calculationText}>
-            <strong>Total Marks: </strong>{totalMarks}
+            <strong>Total Marks: </strong>
+            {totalMarks}
           </div>
           <div style={styles.calculationText}>
-            <strong>Total Credits: </strong>{totalCredits}
+            <strong>Total Credits: </strong>
+            {totalCredits}
           </div>
           <div style={styles.calculationText}>
-            <strong>SGPA: </strong>{result}
+            <strong>SGPA: </strong>
+            {result}
+          </div>
+        </div>
+
+        {/* Display Formula Section */}
+        <div style={styles.formulaSection}>
+          <div style={styles.formulaText}>
+            <strong>SGPA Formula:</strong>
+          </div>
+          <div style={styles.formulaText}>
+            SGPA = (Sum of (Grade Points × Credits)) / (Total Credits)
+          </div>
+          <div style={styles.formulaText}>Where:</div>
+          <div style={styles.formulaText}>
+            - Grade Points are calculated based on marks obtained.
+          </div>
+          <div style={styles.formulaText}>
+            - Credits are the credit hours of the subject.
           </div>
         </div>
       </section>

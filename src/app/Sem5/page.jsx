@@ -138,7 +138,7 @@ function SEM5() {
   return (
     <div style={styles.container}>
       <section style={styles.section}>
-        <h2 style={styles.h2}>Sem 1</h2> {/* Updated the h2 tag */}
+        <h2 style={styles.h2}>Sem 5</h2> {/* Updated the h2 tag */}
 
         {/* Subject 1 */}
         <div style={styles.gap}>
