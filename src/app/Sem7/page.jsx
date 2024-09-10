@@ -63,6 +63,18 @@ const styles = {
   },
 };
 
+// Function to convert percentage to grade points
+const getGradePoint = (percentage) => {
+  if (percentage >= 90) return 10; // O grade
+  if (percentage >= 80) return 9;  // A+ grade
+  if (percentage >= 70) return 8;  // A grade
+  if (percentage >= 60) return 7;  // B+ grade
+  if (percentage >= 55) return 6;  // B grade
+  if (percentage >= 50) return 5;  // C grade
+  if (percentage >= 40) return 4;  // P grade
+  return 0;  // F grade
+};
+
 function SEM1() {
   const [scores, setScores] = useState({
     s1: "",
@@ -75,6 +87,16 @@ function SEM1() {
 
   const [result, setResult] = useState(""); // To store the calculated SGPA
   const [buttonHovered, setButtonHovered] = useState(false); // To handle button hover
+
+  // Define credits for each subject
+  const credits = {
+    s1: 3,
+    s2: 3,
+    s3: 3,
+    s4: 3,
+    s5: 10,
+    s6: 2,
+  };
 
   // Handle input changes
   const handleChange = (e) => {
@@ -89,19 +111,18 @@ function SEM1() {
 
   // Function to calculate SGPA
   const calculateSGPA = () => {
-    const s1 = parseInt(scores.s1) || 0;
-    const s2 = parseInt(scores.s2) || 0;
-    const s3 = parseInt(scores.s3) || 0;
-    const s4 = parseInt(scores.s4) || 0;
-    const s5 = parseInt(scores.s5) || 0;
-    const s6 = parseInt(scores.s6) || 0;
+    const weightedSum =
+      getGradePoint(parseInt(scores.s1) || 0) * credits.s1 +
+      getGradePoint(parseInt(scores.s2) || 0) * credits.s2 +
+      getGradePoint(parseInt(scores.s3) || 0) * credits.s3 +
+      getGradePoint(parseInt(scores.s4) || 0) * credits.s4 +
+      getGradePoint(parseInt(scores.s5) || 0) * credits.s5 +
+      getGradePoint(parseInt(scores.s6) || 0) * credits.s6;
 
-    const r = parseFloat(
-      (s1 * 3 + s2 * 3 + s3 * 3 + s4 * 3 + s5 * 10 + s6 * 2) /
-      (3 + 3 + 3 + 3 + 10 + 2) // Sum of all credits
-    );
+    const totalCredits = Object.values(credits).reduce((acc, credit) => acc + credit, 0);
+    const sgpa = weightedSum / totalCredits;
 
-    setResult(r.toFixed(2)); // Set the calculated SGPA
+    setResult(sgpa.toFixed(2)); // Set the calculated SGPA
   };
 
   return (

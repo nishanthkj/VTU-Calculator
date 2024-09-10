@@ -1,4 +1,5 @@
 "use client";
+import { color } from "framer-motion";
 import React, { useState } from "react";
 
 // CSS Styles as a JavaScript object
@@ -29,6 +30,7 @@ const styles = {
     border: "1px solid #ccc",
     borderRadius: "4px",
     textAlign: "center",
+    color:"black",
   },
   button: {
     width: "100%",
@@ -63,7 +65,7 @@ const styles = {
   }
 };
 
-function SEM1() {
+function PAC() {
   const [scores, setScores] = useState({
     s1: "",
     s2: "",
@@ -103,23 +105,44 @@ function SEM1() {
       s8: 2,
       s9: 1
     };
+// Function to convert percentage to grade points
+const getGradePoint = (percentage) => {
+  if (percentage >= 90) return 10; // O grade
+  if (percentage >= 80) return 9;  // A+ grade
+  if (percentage >= 70) return 8;  // A grade
+  if (percentage >= 60) return 7;  // B+ grade
+  if (percentage >= 55) return 6;  // B grade
+  if (percentage >= 50) return 5;  // C grade
+  if (percentage >= 40) return 4;  // P grade
+  return 0;  // F grade
+};
 
-    const totalCredits = Object.values(credits).reduce((acc, credit) => acc + credit, 0);
+  
 
     const weightedSum = 
-      (parseInt(scores.s1) || 0) * credits.s1 +
-      (parseInt(scores.s2) || 0) * credits.s2 +
-      (parseInt(scores.s3) || 0) * credits.s3 +
-      (parseInt(scores.s4) || 0) * credits.s4 +
-      (parseInt(scores.s5) || 0) * credits.s5 +
-      (parseInt(scores.s6) || 0) * credits.s6 +
-      (parseInt(scores.s7) || 0) * credits.s7 +
-      (parseInt(scores.s8) || 0) * credits.s8 +
-      (parseInt(scores.s9) || 0) * credits.s9;
+    getGradePoint(parseInt(scores.s1) || 0) * credits.s1 +
+    getGradePoint(parseInt(scores.s2) || 0) * credits.s2 +
+    getGradePoint(parseInt(scores.s3) || 0) * credits.s3 +
+    getGradePoint(parseInt(scores.s4) || 0) * credits.s4 +
+    getGradePoint(parseInt(scores.s5) || 0) * credits.s5 +
+    getGradePoint(parseInt(scores.s6) || 0) * credits.s6 +
+    getGradePoint(parseInt(scores.s7) || 0) * credits.s7 +
+    getGradePoint(parseInt(scores.s8) || 0) * credits.s8 +
+    getGradePoint(parseInt(scores.s9) || 0) * credits.s9;
 
-    const sgpa = weightedSum / totalCredits;
-    setResult(sgpa.toFixed(2)); // Set the calculated SGPA
-  };
+  // Calculate total credits
+  const totalCredits = Object.values(credits).reduce((acc, credit) => acc + credit, 0);
+
+  // Calculate SGPA, ensuring division is safe
+  const sgpa = weightedSum / totalCredits;
+
+  // Only update result if SGPA is a valid number
+  if (!isNaN(sgpa)) {
+    setResult(sgpa.toFixed(2)); // Set SGPA to 2 decimal places
+  } else {
+    setResult("Invalid input");
+  }
+};
 
   return (
     <div style={styles.container}>
@@ -284,4 +307,4 @@ function SEM1() {
   );
 }
 
-export default SEM1;
+export default PAC;
