@@ -122,6 +122,15 @@ VTU_Calculator/
 3. **Interact with the application**:
     Use the dropdowns and input fields to calculate VTU results. Access different semester components and PAC features as needed. View custom pages and content as defined in `CustomPage.js` and `CustomContent.js`.
 
+
+## Website 
+![image](https://github.com/user-attachments/assets/6e735856-e07f-4292-a474-ee36fb7b3e47)
+![image](https://github.com/user-attachments/assets/4447b4e2-349a-47fe-b6ce-4f8a2fac77cf)
+![image](https://github.com/user-attachments/assets/ce25f1c4-799e-45ca-8c8e-0e42e4db574e)
+
+
+
+
 ## Conclusion
 
 This documentation provides a comprehensive guide to setting up and running the VTU Calculator application. By following the steps outlined, you should be able to deploy the application and interact with its features. If you encounter any issues, ensure that all dependencies are installed and that the application is correctly configured.
